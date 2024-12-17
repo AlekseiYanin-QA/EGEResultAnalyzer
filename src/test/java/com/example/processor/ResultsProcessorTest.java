@@ -37,7 +37,7 @@ public class ResultsProcessorTest {
 
     @ParameterizedTest
     @CsvSource({
-            "A, B, 30", // Оба ответа правильные
+            "A, B, 20", // Оба ответа правильные
             "B, A, 0",  // Оба ответа неправильные
             "A, D, 10"  // Один правильный, один неправильный
     })

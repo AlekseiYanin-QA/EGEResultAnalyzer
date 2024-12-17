@@ -3,22 +3,16 @@ package org.example.model;
 import java.util.Objects;
 
 public class AnswerKey {
-    private int questionNumber;
+    private final int questionNumber;
     private String answer;
-
-    public AnswerKey() {}
 
     public AnswerKey(int questionNumber, String answer) {
         this.questionNumber = questionNumber;
-        this.answer = answer;
+        setAnswer(answer); // Используем сеттер для валидации
     }
 
     public int getQuestionNumber() {
         return questionNumber;
-    }
-
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
     }
 
     public String getAnswer() {
@@ -34,10 +28,7 @@ public class AnswerKey {
 
     @Override
     public String toString() {
-        return "AnswerKey{" +
-                "questionNumber=" + questionNumber +
-                ", answer='" + answer + '\'' +
-                '}';
+        return String.format("AnswerKey{questionNumber=%d, answer='%s'}", questionNumber, answer);
     }
 
     @Override

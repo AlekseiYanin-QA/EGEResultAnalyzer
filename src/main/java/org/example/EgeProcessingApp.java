@@ -48,24 +48,28 @@ public class EgeProcessingApp {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) continue; // Пропуск пустых строк
+                if (line.trim().isEmpty()) continue;
 
-                String[] parts = line.split("-");
-                if (parts.length != 2) {
-                    logger.warn("Неверный формат строки: {}", line);
-                    continue;
-                }
-                try {
-                    AnswerKey answerKey = new AnswerKey();
-                    answerKey.setQuestionNumber(Integer.parseInt(parts[0].trim()));
-                    answerKey.setAnswer(parts[1].trim());
-                    result.add(answerKey);
-                } catch (NumberFormatException e) {
-                    logger.error("Ошибка при парсинге номера вопроса из строки: {}", line, e);
-                }
+                parseLine(line, result);
             }
             logger.info("Чтение файла: {}", fileName);
         }
         return result;
+    }
+
+    private static void parseLine(String line, List<AnswerKey> result) {
+        String[] parts = line.split("-");
+        if (parts.length != 2) {
+            logger.warn("Неверный формат строки: {}", line);
+            return;
+        }
+        try {
+            int questionNumber = Integer.parseInt(parts[0].trim());
+            String answer = parts[1].trim();
+            AnswerKey answerKey = new AnswerKey(questionNumber, answer);
+            result.add(answerKey);
+        } catch (NumberFormatException e) {
+            logger.error("Ошибка при парсинге номера вопроса из строки: {}", line, e);
+        }
     }
 }
