@@ -1,19 +1,11 @@
 package com.example.model;
 
-
 import org.example.model.AnswerKey;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnswerKeyTest {
-
-    @Test
-    void testDefaultConstructor() {
-        AnswerKey answerKey = new AnswerKey();
-        assertEquals(0, answerKey.getQuestionNumber());
-        assertNull(answerKey.getAnswer());
-    }
 
     @Test
     void testParameterizedConstructor() {
@@ -23,22 +15,15 @@ class AnswerKeyTest {
     }
 
     @Test
-    void testSetQuestionNumber() {
-        AnswerKey answerKey = new AnswerKey();
-        answerKey.setQuestionNumber(2);
-        assertEquals(2, answerKey.getQuestionNumber());
-    }
-
-    @Test
     void testSetAnswer() {
-        AnswerKey answerKey = new AnswerKey();
+        AnswerKey answerKey = new AnswerKey(1, "A");
         answerKey.setAnswer("B");
         assertEquals("B", answerKey.getAnswer());
     }
 
     @Test
     void testSetAnswerNull() {
-        AnswerKey answerKey = new AnswerKey();
+        AnswerKey answerKey = new AnswerKey(1, "A");
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             answerKey.setAnswer(null);
         });
